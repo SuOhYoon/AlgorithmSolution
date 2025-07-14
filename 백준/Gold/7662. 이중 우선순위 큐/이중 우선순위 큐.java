@@ -1,5 +1,4 @@
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.*;
 
 public class Main {
@@ -7,10 +6,12 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out)); // 💡 BufferedWriter 추가
+        StringBuilder sb = new StringBuilder(); // 💡 StringBuilder로 출력 누적
 
-        int T = Integer.parseInt(br.readLine()); // 테스트케이스 수
+        int T = Integer.parseInt(br.readLine());
 
-        while (T-- > 0) { // 테스트 케이스 수 만큼 반복
+        while (T-- > 0) {
             int k = Integer.parseInt(br.readLine());
             map = new TreeMap<>();
 
@@ -27,11 +28,15 @@ public class Main {
             }
 
             if (map.isEmpty()) {
-                System.out.println("EMPTY");
+                sb.append("EMPTY\n");
             } else {
-                System.out.println(map.lastKey() + " " + map.firstKey());
+                sb.append(map.lastKey()).append(" ").append(map.firstKey()).append("\n");
             }
         }
+        br.close();
+        bw.write(sb.toString()); // 한 번에 출력
+        bw.flush();
+        bw.close();
     }
 
     static void insert(int n) {
